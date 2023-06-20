@@ -40,10 +40,9 @@ class MainActivity : ComponentActivity() {
 fun Greeting(name: String) {
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.TopCenter){
         Box(modifier = Modifier
-            .background(Color.Blue)
-            .width(100.dp)
-            .height(100.dp)
-            .verticalScroll(rememberScrollState())){
+            .background(Color.Blue),
+            contentAlignment = Alignment.TopCenter){
+            Box(modifier = Modifier.height(50.dp).width(50.dp).background(Color.Green))
             Text(text = "I love Kotlin", fontSize = 40.sp)
         }
     }
