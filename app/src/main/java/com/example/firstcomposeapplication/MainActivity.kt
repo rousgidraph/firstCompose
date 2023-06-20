@@ -5,6 +5,8 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -14,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.firstcomposeapplication.ui.theme.FirstComposeApplicationTheme
 import com.example.firstcomposeapplication.ui.theme.Typography
 
@@ -26,14 +29,7 @@ class MainActivity : ComponentActivity() {
                 Surface(
                     color = MaterialTheme.colors.background
                 ) {
-                    Row(modifier = Modifier.height(500.dp).width(500.dp).background(Color.LightGray),
-
-                        horizontalArrangement = Arrangement.Center
-                    ) {
-                        customItem(weight = 3f, color = MaterialTheme.colors.secondary)
-                        customItem(weight = 1f)
-
-                    }
+                    Greeting(name = "android")
                 }
             }
         }
@@ -42,7 +38,15 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting(name: String) {
-    Text(text = "Hello $name!")
+    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.TopCenter){
+        Box(modifier = Modifier
+            .background(Color.Blue)
+            .width(100.dp)
+            .height(100.dp)
+            .verticalScroll(rememberScrollState())){
+            Text(text = "I love Kotlin", fontSize = 40.sp)
+        }
+    }
 }
 
 @Composable
@@ -65,13 +69,6 @@ fun RowScope.customItem(weight: Float, color: Color = MaterialTheme.colors.prima
 @Composable
 fun DefaultPreview() {
     FirstComposeApplicationTheme {
-        Row(modifier = Modifier.fillMaxSize().height(500.dp),
-            horizontalArrangement = Arrangement.Start,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            customItem(weight = 3f, color = MaterialTheme.colors.secondary)
-            customItem(weight = 1f)
-
-        }
+       Greeting(name = "android")
     }
 }
