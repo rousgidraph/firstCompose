@@ -4,10 +4,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.selection.DisableSelection
+import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -39,17 +38,23 @@ class TextComposeTest : ComponentActivity() {
                     color = MaterialTheme.colors.background
                 ) {
                     Column(modifier = Modifier.fillMaxSize()) {
-                        Text(
-                            text = stringResource(id = R.string.app_name),
-                            modifier = Modifier
-                                .background(MaterialTheme.colors.primary)
-                                .padding(16.dp)
-                        )
+                        customText4()
                     }
                 }
             }
         }
     }
+}
+
+
+@Composable
+fun anotherTextCompasable() {
+    Text(
+        text = stringResource(id = R.string.app_name),
+        modifier = Modifier
+            .background(MaterialTheme.colors.primary)
+            .padding(16.dp)
+    )
 }
 
 @Composable
@@ -76,14 +81,14 @@ fun customText2() {
 }
 
 
-
 @Composable
-fun customText3(){
+fun customText3() {
     Text(text = "Hello world".repeat(20), maxLines = 2, overflow = TextOverflow.Ellipsis)
 }
 
+
 @Composable
-fun customText(){
+fun customText() {
     Text(
         text = stringResource(id = R.string.app_name),
         modifier = Modifier
@@ -97,12 +102,28 @@ fun customText(){
 
     )
 }
+
+@Composable
+fun customText4() {
+    SelectionContainer(){
+        Column() {
+            Text(text = "Hello World")
+            DisableSelection {
+                Text(text = "Cant Select")
+            }
+            Text(text = "Hello World selectable ")
+            Text(text = "Hello World")
+        }
+
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview2() {
     FirstComposeApplicationTheme {
         Column(modifier = Modifier.fillMaxSize()) {
-            customText3()
+            customText4()
         }
     }
 }
